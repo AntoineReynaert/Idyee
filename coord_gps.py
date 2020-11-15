@@ -22,7 +22,6 @@ def main():
     ville=input("Veuillez saisir la ville: ")
     
     adr= numero +','+nom_rue+','+code_postal+','+ville
-    print(adr)
     print(get_coord(adr))
         
 
