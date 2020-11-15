@@ -15,15 +15,5 @@ def get_coord(adresse):
 
         return (r["features"][0]["geometry"]["coordinates"])
 
-def main():
-    numero=input("Veuillez saisir le numéro: ")
-    nom_rue=input("Veuillez saisir le nom de la rue/voie/avenue: ")
-    code_postal=input("Veuillez saisir le code postal: ")
-    ville=input("Veuillez saisir la ville: ")
-    
-    adr= numero +','+nom_rue+','+code_postal+','+ville
-    print(get_coord(adr))
-        
 
-main()
 
