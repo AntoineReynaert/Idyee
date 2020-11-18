@@ -6,10 +6,10 @@ Développement d'un algorithme de ranking de solutions éco-responsables.
 
 n_amenageur   n_operateur   n_enseigne   id_station   n_station   ad_station   code_insee   Xlongitude   Ylatitude   nbre_pdc   id_pdc   puiss_max   type_prise   acces_recharge   accessibilité   observations   date_maj   source
 
-#Fichier coord_gps.py
+# Fichier coord_gps.py
 
 contient une fonction qui retourne les coordonnées gps d'une adresse saisie
 
-#fichier regions.py
+# Fichier regions.py
 
 contient une fonction qui retourne la région dans laquelle se trouve un point(lieu)
