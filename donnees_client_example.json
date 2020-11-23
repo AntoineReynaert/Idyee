@@ -1,0 +1,11 @@
+{
+    "Nom_societe": "Idyee",
+    "Secteur activte" : "Livraison",
+    "Chiffre d'affaire" : 10000,
+    "Taille" : 50,
+    "Flotte" : {
+    	"voitures_thermiques":3,
+    	"voitures_electriques": 0
+    },
+    "Capacite investissement" : 8000
+}
