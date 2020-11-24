@@ -8,22 +8,21 @@ def openJson(file):
 	    data_dict = json.load(json_data)
 	    return data_dict
 
-def afficher_donnes(dic):
-	for titre_donnee, donnee in dic.items():
-		print(" {:30} {} ".format(titre_donnee,donnee))
-
+def afficher_dico(dic):
+	for cle, valeur in dic.items():
+		print(" {:30} {} ".format(cle,valeur))
 
 def main():
 	file='donnees_client_example.json'
 	aides = "aides_filtrees_nom.csv"
 
 	donnees_client = openJson(file)
-	afficher_donnes(donnees_client)
+	afficher_dico(donnees_client)
 
 	print("\t ROI")
 
 	roi = calcul_roi(donnees_client, aides)
-	afficher_donnes(roi)
+	afficher_dic0(roi)
 
 def calcul_aides(aides, voitures):
 	total = 1000 * voitures
@@ -32,16 +31,19 @@ def calcul_aides(aides, voitures):
 def calcul_roi(donnees_client, aides_fichier):
 
 	aides = openCsv(aides_fichier)
-	borne_a_proximite=True
+	
 	prix_voiture_elec = 10000
 
-	if borne_a_proximite:
-		voitures=donnees_client["Flotte"]["voitures_thermiques"]
-		cout = voitures*prix_voiture_elec - calcul_aides(aides, voitures)
-		while cout > donnees_client["Capacite investissement"]:
-			voitures = voitures - 1
-			aides = calcul_aides(aides, voitures)
-			cout = voitures  * prix_voiture_elec - aides
+
+	voitures = donnees_client["Flotte"]["voitures_thermiques"]
+
+	cout = voitures*prix_voiture_elec - calcul_aides(aides, voitures)
+
+	while cout > donnees_client["Capacite investissement"]:
+		
+		voitures = voitures - 1
+		aides = calcul_aides(aides, voitures)
+		cout = voitures  * prix_voiture_elec - aides
 
 	return (
 		{
