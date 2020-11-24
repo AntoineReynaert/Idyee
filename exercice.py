@@ -9,8 +9,8 @@ def openJson(file):
 	    return data_dict
 
 def afficher_dico(dic):
-	for titre_donnee, donnee in dic.items():
-		print(" {:30} {} ".format(titre_donnee,donnee))
+	for cle, valeur in dic.items():
+		print(" {:30} {} ".format(cle,valeur))
 
 def main():
 	fichier='donnees_client_example.json'
