@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from math import *
 
 ### Class Point
 
@@ -18,12 +19,13 @@ Méthodes:
 """
 
 class Point:
-    def __init__(self, x, y):
+    def __init__(self, x, y, carac):
         self.__x = x
         self.__y = y
+        self.__carac = carac
         
     def __str__(self):
-        return "(" + str(self.getX()) + "," + str(self.getY()) + ")"
+        return "(" + str(self.getX()) + "," + str(self.getY()) + "," + str(self.getCarac()) + ")"
 
     def getX(self):
         return self.__x
@@ -43,3 +45,9 @@ class Point:
         pointBLong = radians(pointB.getX())
         pointBLat = radians(pointB.getY())
         return 6371.01 * acos(sin(selfLat)*sin(pointBLat) + cos(selfLat)*cos(pointBLat)*cos(selfLong - pointBLong))
+        
+    def setCarac(self, string):
+        self.__carac = string
+    
+    def getCarac(self):
+        return self.__carac
