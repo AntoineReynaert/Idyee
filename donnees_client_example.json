@@ -1,12 +1,17 @@
 {
     "Nom_societe": "Idyee",
+    "adresse" : "1 cours jean jaures",
     "Code postal": "38000",
     "Secteur activte" : "energie",
     "Chiffre d'affaire" : 10000,
-    "Taille" : 50,
+    "Nombre de salaries" : 50,
     "Flotte" : {
-    	"voitures_thermiques":3,
-    	"voitures_electriques": 0
+    	"voitures_thermiques":5,
+    	"voitures_electriques": 0,
+    	"utilitaires_thermiques":3,
+    	"utilitaires_electriques": 0
     },
-    "Capacite investissement" : 8000
+    "Capacite investissement" : 100000,
+    "km annuel" : 100000,
+    "Location 0, Acahat 1 " : 1
 }
