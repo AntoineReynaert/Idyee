@@ -19,6 +19,8 @@ def openCsv(file):
         donnees = list()
         for row in spamreader:
             donnees.append(row)
+            
+    donnees.remove(donnees[0])
     return donnees
 
 """      
@@ -30,18 +32,24 @@ def openCsv(file):
 def terminalsCoordinates(donnees):
     indexLongitude = 7
     indexLatitude = 8
+    indexPuissanceMax = 11
+    indexTypePrise = 12
     memory = list()
     for row in donnees:
-        memory.append(Point(row[indexLongitude],row[indexLatitude]))
+        a=row[indexLongitude]
+        b=row[indexLatitude]
+        carac = "Type de prise " + str(row[indexTypePrise]) + " avec une puissance maximale de " + str(row[indexPuissanceMax]) + " kW"
+        if a!="" and b!="":
+            memory.append(Point(float(a.replace("*",".").replace(" ","")),float(b.replace("*",".").replace(" ","")),carac))
     return memory
     
 
 """
 Fonction principale pour lancer l'algorithme
 """
-def main():
-    reader = openCsv("bornes-irve-20200920.csv")
-    for element in terminalsCoordinates(reader):
-        print(element)
-
-main()
+# def main():
+#     reader = openCsv("bornes-irve-20200920.csv")
+#     for element in terminalsCoordinates(reader):
+#         print(element)
+# 
+# main()
