@@ -60,5 +60,5 @@ def main():
         for element in calcul:
             print(str(element[0]) + " " + str(element[1]) + " " + element[2])
 
-main()
-
+if __name__ == "__main__":
+    main()

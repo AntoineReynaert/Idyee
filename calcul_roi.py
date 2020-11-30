@@ -3,9 +3,7 @@
 import json
 from read_aides import openCsv
 
-# import calcul
-# if len(calcul.a_proximite(adresse))>0
-
+import Calcul
 
 # # source : https://www.kelwatt.fr/guide/conso/voiture-electrique
 # prix_km_thermique = 0.075
@@ -95,9 +93,9 @@ def main():
 
 	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"])
 
-	# borne = calcul.a_proximite(adresse)
-	borne = ""
-	if borne=="":
+	borne = Calcul.a_proximite(donnees_client["Numéro"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
+	
+	if not borne:
 		cout = cout +1500
 		borne="borne à construire"
 
