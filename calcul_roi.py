@@ -80,7 +80,7 @@ def calcul_roi(voitures, utilitaires, km):
 	entretien_voitures ,entretien_utilitaires, km_voitures, km_utilitaires = (1314 - 1046, 0, 0.05, 0.05)
 	roi_entretien = voitures * entretien_voitures + utilitaires * entretien_utilitaires
 	roi_km = voitures * km * km_voitures + utilitaires * km * km_utilitaires
-	return (int(roi_entretien), int(roi_km))
+	return int(roi_entretien), int(roi_km)
 
 # cette fonction lit le fichier json des donnes du client, affiche ces données, calcule la conversion possible de la flotte et le retour sur investissement de cette flotte.
 # Elle affiche la nouvelle flotte électrique son cout et les retour sur investissement
