@@ -50,11 +50,7 @@ def a_proximite(adr):
                     proche.append([get_adr([cle.getX(),cle.getY()]), distance, cle.getCarac()])
         if not proche:
             print("Aucune borne n'a été trouvé à proximité")
-        else:
-            return proche                    
-
-         
-
+        return proche                    
 
         
 def main():
