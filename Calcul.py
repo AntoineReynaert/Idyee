@@ -38,30 +38,27 @@ def a_proximite(adr):
     #récupere les coordonnées constituant notre carré
         aux=findpoints(adrCoord[0],adrCoord[1])
         proche=[]
+        adresse = pt(adrCoord[0],adrCoord[1],"")
         #parcourir les bornes:
         for cle,valeur in bornes.items():
             #verifier que la borne se trouve dans le carré
             if float(cle.getX())<=aux[3] and float(cle.getX())>=aux[2] and float(cle.getY())<=aux[1] and float(cle.getY())>=aux[0]:
                 #calculer la distance
-                distance=pt(adrCoord[0],adrCoord[1]).distancePoint(pt(float(cle.getX()),float(cle.getY())))
+                distance=adresse.distancePoint(cle)
                 #retenir que les bornes avec une distance inférieure ou égale à 1km
                 if distance <=1:
-                    proche.append([get_adr([float(cle.getX()),float(cle.getY())]), distance])
+                    proche.append([get_adr([cle.getX(),cle.getY()]), distance, cle.getCarac()])
         if not proche:
             print("Aucune borne n'a été trouvé à proximité")
-        else:
-            return proche                    
-
-         
-
+        return proche                    
 
         
 def main():
-    adresse=input("Veuillez saisir une adresse")
+    adresse=input("Veuillez saisir une adresse: ")
     calcul=a_proximite(adresse)
     if calcul:
         for element in calcul:
-            print(element[0], " ", element[1])
+            print(str(element[0]) + " " + str(element[1]) + " " + element[2])
 
 main()
 
