@@ -93,7 +93,7 @@ def main():
 
 	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"])
 
-	borne = Calcul.a_proximite(donnees_client["Numéro"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
+	borne = Calcul.a_proximite(donnees_client["Numero"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
 	
 	if not borne:
 		cout = cout +1500
