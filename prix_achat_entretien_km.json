@@ -1,0 +1,8 @@
+{
+    "prix_km_thermique"  : 0.075,
+    "prix_km_elec" : 0.025,
+    "prix_voiture_elec" : 32300,
+    "prix_utilitaire_elec" : 55000,
+    "entretien_annuel_voiture_elec" : 1046,
+    "entretien_annuel_voiture_thermique" : 1314
+}
