@@ -1,0 +1,16 @@
+{
+    "Nom_societe": "Idyee",
+    "Numero" : "8",
+    "Nom de rue" : "cours jean jaures",
+    "Code postal": "38000",
+    "Ville": "Grenoble",
+    "Flotte" : {
+    	"Voitures_thermiques":5,
+    	"Voitures_electriques": 0,
+    	"Utilitaires_thermiques":3,
+    	"Utilitaires_electriques": 0
+    },
+    "Km annuel" : 100000,
+    "Capacite investissement" : 100000,
+    "Location 0, Achat 1 " : 1
+}
