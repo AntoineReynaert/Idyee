@@ -10,6 +10,20 @@
     	"Utilitaires_thermiques":3,
     	"Utilitaires_electriques": 0
     },
+    "Frais":{
+        "Aggregat":"0",
+        "Carburant_utilitaire":,
+        "Assurance_utilitaire":,
+        "Maintenance_utilitaire":,
+        "Taxe_utilitaire":,
+        "Divers_utilitaire":,
+        "Carburant_voiture":,
+        "Assurance_voiture":,
+        "Maintenance_voiture":,
+        "Taxe_voiture":,
+        "Divers_voiture":,
+        "Total":,
+    },
     "Km annuel" : 100000,
     "Capacite investissement" : 100000,
     "Location 0, Achat 1 " : 1
