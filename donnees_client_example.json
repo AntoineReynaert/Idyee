@@ -22,7 +22,9 @@
         "Maintenance_voiture":,
         "Taxe_voiture":,
         "Divers_voiture":,
-        "Total":,
+        "Total_voiture":,
+        "Total_utilitaire":,
+
     },
     "Km annuel" : 100000,
     "Capacite investissement" : 100000,
