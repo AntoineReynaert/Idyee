@@ -22,8 +22,10 @@
         "Maintenance_voiture":,
         "Taxe_voiture":,
         "Divers_voiture":,
-        "Total_voiture":,
-        "Total_utilitaire":,
+        "Total_voiture_maintenance":,
+        "Total_utilitaire_maintenance":,
+        "Total_voiture_carburant":,
+        "Total_utilitaire_carburant":,
 
     },
     "Km annuel" : 100000,
