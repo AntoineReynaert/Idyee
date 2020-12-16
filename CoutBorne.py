@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+from math import *
 from calcul_roi_v2 import *
 import datetime
 
@@ -29,14 +29,25 @@ def aideAdvenir(prixRaccordement,prixBorne):
 """
 Fonction calculant le coût de construction d'une borne en s'appuyant sur les données
 des Wallbox 22kw.
-Prend en entrée :  - aidesBornes = list() des aides
+Prends en entrée :  - aidesBornes = list() des aides
                    - prixRaccordement = int() prix du raccordement d'une borne au
                      réseau électrique
                    - prixBorne = int() prix d'une borne électrique 
 """
 def CoutConstructionBorne(aidesBornes,prixRaccordement,prixBorne):
     return prixRaccordement+prixBorne-sum(aidesBornes)
-    
+
+
+"""
+Nombre de bornes à construire en fonction du nombre de nouveaux véhicules électriques
+Prends en entrée: - nb_voiture = int()
+"""
+def nombreBorne(nb_voiture):
+    return ceil(nb_voiture/2)
+  
+def resultCoutBorne(nb_voiture):
+    return nombreBorne(nb_voiture)*CoutConstructionBorne([aideAdvenir(getPrixBorne(),getPrixRaccordement())],getPrixRaccordement(),getPrixBorne())
+
 if __name__ == "__main__":
 	print(CoutConstructionBorne([aideAdvenir(getPrixBorne(),getPrixRaccordement())],getPrixRaccordement(),getPrixBorne()))
 
