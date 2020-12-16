@@ -68,6 +68,19 @@ def calcul_conversion_flotte(donnees_client):
 # cette fonction calcul le retour sur investissement annuel sur l'entretien et sur les km parcourus
 def calcul_roi(nb_voitures, nb_utilitaires, km):
 	prix=openJson("prix_achat_entretien_km.json")
+
+	donnees=openJson("donnees_client_example.json")
+
+	carburant_voiture=donnees["Frais"]["Total_voiture_carburant"]
+	carburant_utilitaire=donnees["Frais"]["Total_utilitaire_carburant"]
+
+	if donnees["Frais"]["Aggregat"]==1:
+		maintenance_voiture=donnees["Frais"]["Total_voiture_maintenance"]
+		maintenance_utilitaire=donnees["Frais"]["Total_utilitaire_maintenance"]
+	if donnees["Frais"]["Aggregat"]==0:
+		frais=donnees["Frais"]
+		
+
 	roi_entretien_voiture = prix["entretien_annuel_voiture_thermique"] - prix["entretien_annuel_voiture_elec"]
 	roi_entretien_utilitaire = 0 #non determine pour le moment
 	roi_km_voiture, roi_km_utilitaire = prix["prix_km_thermique"]- prix["prix_km_elec"], prix["prix_km_thermique"]- prix["prix_km_elec"]
