@@ -2,7 +2,7 @@
 
 import json
 import Calcul
-
+from calcul_emission_co2 import calcul_baisse_emission
 
 # Cette fonction ourve un fichier et json et le renvoie sous forme de dictionnaire
 def openJson(file):
@@ -66,15 +66,16 @@ def calcul_conversion_flotte(donnees_client):
 
 
 # cette fonction calcul le retour sur investissement annuel sur l'entretien et sur les km parcourus
-def calcul_roi(nb_voitures, nb_utilitaires, km):
+def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 	prix=openJson("prix_achat_entretien_km.json")
 	roi_entretien_voiture = prix["entretien_annuel_voiture_thermique"] - prix["entretien_annuel_voiture_elec"]
 	roi_entretien_utilitaire = 0 #non determine pour le moment
-	roi_km_voiture, roi_km_utilitaire = prix["prix_km_thermique"]- prix["prix_km_elec"], prix["prix_km_thermique"]- prix["prix_km_elec"]
+	roi_km_voiture, roi_km_utilitaire = prix["prix_km_thermique"] - prix["prix_km_elec"], prix["prix_km_thermique"] - prix["prix_km_elec"]
 	# il faudra ajouter les prix pour un utilitaire
 
 	roi_entretien = nb_voitures * roi_entretien_voiture + nb_utilitaires * roi_entretien_utilitaire
-	roi_km = nb_voitures * km * roi_km_voiture + nb_utilitaires * km * roi_km_utilitaire
+	roi_km = (nb_voitures * km * roi_km_voiture + nb_utilitaires * km * roi_km_utilitaire) * pourcentage*0.01
+
 	return int(roi_entretien), int(roi_km)
 
 
@@ -88,7 +89,8 @@ def calcul_solution(fichier_client, verbose=True):
 	if not borne: borne="Borne à construire"
 
 	cout, conversion_voitures, conversion_utilitaires = calcul_conversion_flotte(donnees_client)
-	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"])
+	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
+	baisse_emission = calcul_baisse_emission(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
 
 	return {"Nouvelles voitures elec" : conversion_voitures,\
 			"Nouveaux utilitaires elec" : conversion_utilitaires,\
@@ -98,7 +100,8 @@ def calcul_solution(fichier_client, verbose=True):
 			"Bonus ecologique":cout[3],\
 			"Cout final":cout[0],\
 			"ROI annuel sur l'entretien":roi[0],\
-			"ROI annuel sur les km":roi[1]\
+			"ROI annuel sur les km":roi[1],\
+			"Baisse emission co2":baisse_emission,\
 			}
 
 
