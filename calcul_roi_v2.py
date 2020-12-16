@@ -77,8 +77,7 @@ def calcul_roi(nb_voitures, nb_utilitaires, km):
 	if donnees["Frais"]["Aggregat"]==1:
 		maintenance_voiture=donnees["Frais"]["Total_voiture_maintenance"]
 		maintenance_utilitaire=donnees["Frais"]["Total_utilitaire_maintenance"]
-	if donnees["Frais"]["Aggregat"]==0:
-		frais=donnees["Frais"]
+
 		
 
 	roi_entretien_voiture = prix["entretien_annuel_voiture_thermique"] - prix["entretien_annuel_voiture_elec"]
