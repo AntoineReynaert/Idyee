@@ -3,10 +3,13 @@
 Source : https://www.kelwatt.fr/guide/conso/voiture-electrique
 
 Unité : €/km
-| type      | citadin | rural |
-| ------    | ------  | ----- |
-| elec      | 0.025   |   ?   |
-| thermique | 0.075   |   ?   |
+| elec| thermiq |
+| ------ | ------ |
+| cell | cell |
+| cell | cell |
+
+
+
 
 ## Prix borne 
 
