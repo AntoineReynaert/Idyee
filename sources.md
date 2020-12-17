@@ -3,7 +3,7 @@
 Source : https://www.kelwatt.fr/guide/conso/voiture-electrique
 
 Unité : €/km
-| elec| thermiq |
+| header | header |
 | ------ | ------ |
 | cell | cell |
 | cell | cell |
