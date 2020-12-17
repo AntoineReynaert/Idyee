@@ -61,12 +61,14 @@ Unité : €/km
 # Emission co2 
 
 ### voitures
+clio : https://www.neowebcar.com/co2/renault/clio/1-2
+
 Unité : kg/km
 
 | type      | citadin | rural |
 | ------    | ------  | ----- |
 | elec      | 0.055   |   ?   |
-| thermique | ?       |   ?   |
+| thermique | 0.144   |   ?   |
 
 ### utilitaires
 Unité : kg/km
