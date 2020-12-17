@@ -1,10 +1,12 @@
 ## Prix au km
 
-source : https://www.kelwatt.fr/guide/conso/voiture-electrique
-elec citadin 0.025 €/km
-thermique citadin 0.075 €/km
-elec rural
-thermique rural 
+Source : https://www.kelwatt.fr/guide/conso/voiture-electrique
+
+Unité : €/km
+| type      | citadin | rural |
+| ------    | ------  | ----- |
+| elec      | 0.025   |   ?   |
+| thermique | 0.075   |   ?   |
 
 ## Prix borne 
 
