@@ -1,8 +1,15 @@
 {
-    "prix_km_thermique"  : 0.075,
-    "prix_km_elec" : 0.025,
     "prix_voiture_elec" : 32300,
     "prix_utilitaire_elec" : 55000,
     "entretien_annuel_voiture_elec" : 1046,
-    "entretien_annuel_voiture_thermique" : 1314
+    "entretien_annuel_voiture_thermique" : 1314,
+    
+    "voiture_citadin_elec": 0.025,
+    "voiture_citadin_thermique": 0.075,
+    "voiture_rural_elec": 0,
+    "voiture_rural_thermique": 0,
+    "utilitaire_citadin_elec": 0,
+    "utilitaire_citadin_thermique": 0,
+    "utilitaire_rural_elec": 0,
+    "utilitaire_rural_thermique": 0
 }

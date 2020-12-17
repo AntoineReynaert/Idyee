@@ -70,11 +70,12 @@ def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 	prix=openJson("prix_achat_entretien_km.json")
 	roi_entretien_voiture = prix["entretien_annuel_voiture_thermique"] - prix["entretien_annuel_voiture_elec"]
 	roi_entretien_utilitaire = 0 #non determine pour le moment
-	roi_km_voiture, roi_km_utilitaire = prix["prix_km_thermique"] - prix["prix_km_elec"], prix["prix_km_thermique"] - prix["prix_km_elec"]
-	# il faudra ajouter les prix pour un utilitaire
+	pvce, pvct, pvre, pvrt, puce, puct, pure, purt = prix["voiture_citadin_elec"], prix["voiture_citadin_thermique"],prix["voiture_rural_elec"], prix["voiture_rural_thermique"], prix["utilitaire_citadin_elec"], prix["utilitaire_citadin_thermique"], prix["utilitaire_rural_elec"], prix["utilitaire_rural_thermique"]
 
 	roi_entretien = nb_voitures * roi_entretien_voiture + nb_utilitaires * roi_entretien_utilitaire
-	roi_km = (nb_voitures * km * roi_km_voiture + nb_utilitaires * km * roi_km_utilitaire) * pourcentage*0.01
+	# citadin + rural
+	roi_km = (nb_voitures * km * (pvct - pvce) + nb_utilitaires * km * (puct - puce)) * pourcentage     *0.01 \
+			+(nb_voitures * km * (pvrt - pvre) + nb_utilitaires * km * (purt - pure)) * (1-pourcentage) *0.01
 
 	return int(roi_entretien), int(roi_km)
 
