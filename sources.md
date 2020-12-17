@@ -1,7 +1,7 @@
 
 ## Prix au km
 
-source : https://www.kelwatt.fr/guide/conso/voiture-electrique)
+source : https://www.kelwatt.fr/guide/conso/voiture-electrique
 prix_km_thermique = 0.075
 prix_km_elec = 0.025
 
@@ -23,3 +23,21 @@ prix_utilitaire_elec = 55000
 Pour une zoe et une clio, source : https://www.clubic.com/transport-electrique/article-888671-1-sr-cout-entretien-voiture-electrique.html
 entretien_annuel_voiture_elec = 1046
 entretien entretien_annuel_voiture_thermique = 1314 
+
+## Emission co2 
+
+### voitures
+en kg/km
+
+elec citadin 0.055 kg/km
+thermique citadin  
+elec rural
+thermique rural 
+
+### utilitaires
+en kg/km
+
+elec citadin 0.055 kg/km
+thermique citadin  
+elec rural 
+thermique rural 

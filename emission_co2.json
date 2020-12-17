@@ -1,5 +1,5 @@
 {
-    "voiture_citadin_elec": 0.06,
+    "voiture_citadin_elec": 0.055,
     "voiture_citadin_thermique": 0.8,
     "voiture_rural_elec": 0.02,
     "voiture_rural_thermique": 0.6,
