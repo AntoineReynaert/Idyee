@@ -11,24 +11,22 @@
     	"Utilitaires_electriques": 0
     },
     "Frais":{
-        "Aggregat":"0",
-        "Carburant_utilitaire":,
-        "Assurance_utilitaire":,
-        "Maintenance_utilitaire":,
-        "Taxe_utilitaire":,
-        "Divers_utilitaire":,
-        "Carburant_voiture":,
-        "Assurance_voiture":,
-        "Maintenance_voiture":,
-        "Taxe_voiture":,
-        "Divers_voiture":,
-        "Total_voiture_maintenance":,
-        "Total_utilitaire_maintenance":,
-        "Total_voiture_carburant":,
-        "Total_utilitaire_carburant":,
+        "Aggregat":0,
+        "Assurance_utilitaire":700,
+        "Maintenance_utilitaire":300,
+        "Taxe_utilitaire":400,
+        "Divers_utilitaire":200,
+        "Assurance_voiture":600,
+        "Maintenance_voiture":250,
+        "Taxe_voiture":300,
+        "Divers_voiture":150,
+        "Total_voiture_entretien":1600,
+        "Total_utilitaire_entretien":2000,
+        "Total_voiture_carburant":3200,
+        "Total_utilitaire_carburant":4860
 
     },
-    "Km annuel" : 100000,
+    "Km annuel" : 40000,
     "Capacite investissement" : 100000,
     "Location 0, Achat 1 " : 1
 }
