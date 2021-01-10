@@ -29,6 +29,9 @@ Unité : €/an
 | thermique | 1314    |   ?   |
 
 ### utilitaires
+
+https://vehicules-utilitaires.ooreka.fr/comprendre/emission-co2
+
 Unité : €/an
 
 | type      | citadin | rural |
@@ -67,13 +70,15 @@ Unité : kg/km
 
 | type      | citadin | rural |
 | ------    | ------  | ----- |
-| elec      | 0.055   |   ?   |
+| elec      | 0.050   |   ?   |
 | thermique | 0.144   |   ?   |
 
 ### utilitaires
 Unité : kg/km
+https://www.actu-environnement.com/ae/news/emissions-carbone-vehicules-utilitaires-legers-neufs-baisse-UE-2017-31312.php4
+https://vehicules-utilitaires.ooreka.fr/comprendre/emission-co2
 
 | type      | citadin | rural |
 | ------    | ------  | ----- |
-| elec      | ?       |   ?   |
-| thermique | ?       |   ?   |
+| elec      | 0.060       |   ?   |
+| thermique | 0.156       |   ?   |
