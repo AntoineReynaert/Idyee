@@ -3,12 +3,13 @@
 import json
 import Calcul
 from calcul_emission_co2 import calcul_baisse_emission
+import CoutBorne
 
 # Cette fonction ourve un fichier et json et le renvoie sous forme de dictionnaire
 def openJson(file):
 	with open(file) as json_data:
-	    data_dict = json.load(json_data)
-	    return data_dict
+		data_dict = json.load(json_data)
+		return data_dict
 
 
 # Cette fonction affiche les éléments d'un dictionnaire
@@ -49,7 +50,7 @@ def calcul_cout(nb_voitures, nb_utilitaires):
 	cout_initial = nb_voitures * prix_voiture_elec + nb_utilitaires * prix_utilitaire_elec 
 	cout_final = cout_initial - prime_conversion_total - bonus_ecologique_total
 
-	return cout_final, cout_initial, prime_conversion_total, bonus_ecologique_total
+	return [cout_final, cout_initial, prime_conversion_total, bonus_ecologique_total]
 
 # cette fonction calcule la flotte éléctrique que peut acheter le client selon sa capacité d'investissement et la taille de sa follte thermique
 # Elle retourne le nombre de véhicules éléctriques qui peuvent être achetées et leur cout 
@@ -62,7 +63,7 @@ def calcul_conversion_flotte(donnees_client):
 			util = util-1
 		else :
 			voit, util = voit -1, util-1
-	return calcul_cout(voit, util), voit, util
+	return [calcul_cout(voit, util), voit, util]
 
 
 # cette fonction calcul le retour sur investissement annuel sur l'entretien et sur les km parcourus
@@ -77,21 +78,28 @@ def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 	roi_km = (nb_voitures * km * (pvct - pvce) + nb_utilitaires * km * (puct - puce)) * pourcentage     *0.01 \
 			+(nb_voitures * km * (pvrt - pvre) + nb_utilitaires * km * (purt - pure)) * (1-pourcentage) *0.01
 
-	return int(roi_entretien), int(roi_km)
+	return [int(roi_entretien), int(roi_km)]
 
 
 # cette fonction lit le fichier json des donnes du client, affiche ces données, calcule la conversion possible de la flotte et le retour sur investissement de cette flotte.
 # Elle affiche la nouvelle flotte électrique son cout et les retour sur investissement
-def calcul_solution(fichier_client, verbose=True):
+def calcul_solution_flotte(fichier_client, verbose=True):
 	donnees_client = openJson(fichier_client)
 	if verbose : afficher_dico(donnees_client)
 
 	borne = Calcul.a_proximite(donnees_client["Numero"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
-	if not borne: borne="Borne à construire"
-
 	cout, conversion_voitures, conversion_utilitaires = calcul_conversion_flotte(donnees_client)
 	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
 	baisse_emission = calcul_baisse_emission(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
+	
+	if not borne:
+		coutTotBorne = CoutBorne.resultCoutBorne(conversion_voitures+conversion_utilitaires)
+		borne="Borne à construire: " + str(CoutBorne.nombreBorne(conversion_voitures+conversion_utilitaires)) \
+		+ " pour un coût de " + str(coutTotBorne) + "€."
+		cout[1] += coutTotBorne
+		cout[0] += coutTotBorne
+		cout[3] += CoutBorne.getAidesBornes()
+
 
 	return {"Nouvelles voitures elec" : conversion_voitures,\
 			"Nouveaux utilitaires elec" : conversion_utilitaires,\
@@ -107,6 +115,6 @@ def calcul_solution(fichier_client, verbose=True):
 
 
 if __name__ == "__main__":
-	solution = calcul_solution("donnees_client_example.json")
+	solution = calcul_solution_flotte("donnees_client_example.json")
 	print("\n\n 		Solution Proposé \n")
 	afficher_dico(solution)
