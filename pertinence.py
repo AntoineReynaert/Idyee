@@ -37,7 +37,7 @@ class Solution:
     #Calcul du rang du ROI sur neuf    
     def calculROI(self,benefAn,coutInvestissement):
         ROI = (benefAn/coutInvestissement)
-        self.ROI = round((1/(1+exp((-13*ROI)+5))) * 9,2)
+        self.ROI = round((1/(1+exp((-20*ROI)+0.4))) * 9,2)
         
     #Calcul du rang du TRP sur neuf
     def calculTRP(self,gainCO2An,coutInvestissement):
