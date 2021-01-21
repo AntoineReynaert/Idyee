@@ -85,6 +85,7 @@ def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 # Elle affiche la nouvelle flotte électrique son cout et les retour sur investissement
 def calcul_solution_flotte(fichier_client, verbose=True):
 	donnees_client = openJson(fichier_client)
+	donnees_borne = openJson("construction_borne.json")
 	if verbose : afficher_dico(donnees_client)
 
 	borne = Calcul.a_proximite(donnees_client["Numero"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
@@ -93,12 +94,12 @@ def calcul_solution_flotte(fichier_client, verbose=True):
 	baisse_emission = calcul_baisse_emission(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
 	
 	if not borne:
-		coutTotBorne = CoutBorne.resultCoutBorne(conversion_voitures+conversion_utilitaires)
+		coutTotBorne = CoutBorne.resultCoutBorne(conversion_voitures+conversion_utilitaires,donnees_borne)
 		borne="Borne à construire: " + str(CoutBorne.nombreBorne(conversion_voitures+conversion_utilitaires)) \
 		+ " pour un coût de " + str(coutTotBorne) + "€."
 		cout[1] += coutTotBorne
 		cout[0] += coutTotBorne
-		cout[3] += CoutBorne.getAidesBornes()
+		cout[3] += CoutBorne.getAidesBornes(donnees_borne)
 
 
 	return {"Nouvelles voitures elec" : conversion_voitures,\

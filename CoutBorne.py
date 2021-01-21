@@ -14,9 +14,8 @@ def openJson(file):
 """
 Retoune la somme des aides pour la construction des bornes.
 """
-def getAidesBornes():
-    construction=openJson("construction_borne.json")
-    return sum(construction["aides_bornes"])
+def getAidesBornes(dict):
+    return sum(dict["aides_bornes"])
   
 
 """
@@ -27,10 +26,9 @@ Prends en entrée :  - aidesBornes = list() des aides
                      réseau électrique
                    - prixBorne = int() prix d'une borne électrique 
 """
-def CoutConstructionBorne():
-    construction = openJson("construction_borne.json")
-    aides = sum(construction["aides_bornes"])
-    prix = construction["prix_raccordement"] + construction["prix_borne"]
+def CoutConstructionBorne(dict):
+    aides = sum(dict["aides_bornes"])
+    prix = dict["prix_raccordement"] + dict["prix_borne"]
     return prix - aides
 
 
@@ -44,10 +42,10 @@ def nombreBorne(nb_voiture):
 """
 Coût total de la construction des bornes
 """
-def resultCoutBorne(nb_voiture):
-    return nombreBorne(nb_voiture)*CoutConstructionBorne()
+def resultCoutBorne(nb_voiture,dict):
+    return nombreBorne(nb_voiture)*CoutConstructionBorne(dict)
 
 
 if __name__ == "__main__":
-	print(CoutConstructionBorne())
+	print(CoutConstructionBorne(openJson("construction_borne.json")))
 
