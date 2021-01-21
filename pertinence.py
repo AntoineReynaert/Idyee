@@ -41,7 +41,8 @@ class Solution:
         
     #Calcul du rang du TRP sur neuf
     def calculTRP(self,gainCO2An,coutInvestissement):
-        self.TRP = round((gainCO2An/coutInvestissement)*9,2)
+        TRP = gainCO2An/coutInvestissement
+        self.TRP = round((1/(1+exp((-20*TRP)+0.4))) * 9,2)
     
     def calculRang(self):
         self.rang = self.getROI() + self.getTRP() + self.getVisibilite()

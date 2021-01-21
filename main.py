@@ -4,6 +4,7 @@ from pertinence import *
 import json
 
 """
+Fonction principale permettant de calculer la pertinence des solutions bas carbone.
 """
 
 def main():
