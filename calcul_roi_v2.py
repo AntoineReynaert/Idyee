@@ -2,14 +2,14 @@
 
 import json
 import Calcul
+from calcul_emission_co2 import calcul_baisse_emission
 import CoutBorne
-
 
 # Cette fonction ourve un fichier et json et le renvoie sous forme de dictionnaire
 def openJson(file):
 	with open(file) as json_data:
-	    data_dict = json.load(json_data)
-	    return data_dict
+		data_dict = json.load(json_data)
+		return data_dict
 
 
 # Cette fonction affiche les éléments d'un dictionnaire
@@ -67,63 +67,39 @@ def calcul_conversion_flotte(donnees_client):
 
 
 # cette fonction calcul le retour sur investissement annuel sur l'entretien et sur les km parcourus
-def calcul_roi(nb_voitures, nb_utilitaires, km,borne):
+def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 	prix=openJson("prix_achat_entretien_km.json")
-	donnees=openJson("donnees_client_example.json")
-	#Instanciation des frais de gestion et de carburant de l'utilisateur
-	frais=donnees["Frais"]
-	prix_carburant_voiture_t=frais["Total_voiture_carburant"]
-	prix_carburant_utilitaire_t=frais["Total_utilitaire_carburant"]
-	if frais["Aggregat"]==0:
-		prix_entretien_voiture_t=frais["Total_voiture_entretien"]
-		prix_entretien_utilitaire_t=frais["Total_utilitaire_entretien"]
-	if frais["Aggregat"]==1:
-		prix_entretien_voiture_t=frais["Assurance_voiture"]+frais["Maintenance_voiture"]+frais["Taxe_voiture"]+frais["Divers_voiture"]
-		prix_entretien_utilitaire_t=frais["Assurance_utilitaire"]+frais["Maintenance_utilitaire"]+frais["Taxe_utilitaire"]+frais["Divers_utilitaire"]
-
-	#Le prix de recharge d'une voiture électrique varie en rechargeant sur une borne publique et privée
-	if not borne:
-		prix_carburant_voiture_e=prix["prix_km_elec_borne_priv"]
-		prix_carburant_utilitaire_e=prix["prix_km_elec_borne_priv"]
-	else:
-		prix_carburant_voiture_e=prix["prix_km_elec_borne_pub"]
-		prix_carburant_utilitaire_e=prix["prix_km_elec_borne_pub"]
-
-	roi_entretien_voiture = prix_entretien_voiture_t - prix["entretien_annuel_voiture_elec"]
-	roi_entretien_utilitaire = prix_entretien_utilitaire_t- prix["entretien_annuel_utilitaire_elec"]
-	roi_km_voiture, roi_km_utilitaire = prix_carburant_voiture_t/km- prix_carburant_voiture_e, prix_carburant_utilitaire_t/km- prix_carburant_utilitaire_e
-	# il faudra ajouter les prix pour un utilitaire
+	roi_entretien_voiture = prix["entretien_annuel_voiture_thermique"] - prix["entretien_annuel_voiture_elec"]
+	roi_entretien_utilitaire = 0 #non determine pour le moment
+	pvce, pvct, pvre, pvrt, puce, puct, pure, purt = prix["voiture_citadin_elec"], prix["voiture_citadin_thermique"],prix["voiture_rural_elec"], prix["voiture_rural_thermique"], prix["utilitaire_citadin_elec"], prix["utilitaire_citadin_thermique"], prix["utilitaire_rural_elec"], prix["utilitaire_rural_thermique"]
 
 	roi_entretien = nb_voitures * roi_entretien_voiture + nb_utilitaires * roi_entretien_utilitaire
-	roi_km = nb_voitures * km * roi_km_voiture + nb_utilitaires * km * roi_km_utilitaire
-	return [int(roi_entretien), int(roi_km)]
+	# citadin + rural
+	roi_km = (nb_voitures * km * (pvct - pvce) + nb_utilitaires * km * (puct - puce)) * pourcentage     *0.01 \
+			+(nb_voitures * km * (pvrt - pvre) + nb_utilitaires * km * (purt - pure)) * (1-pourcentage) *0.01
 
-# Calcul à partir de combien de temps l'investissement devient rentable
-def seuilRentabilite(RoiAnnuel,CoutTotal):
-	seuil = CoutTotal/RoiAnnuel
-	nbAnnee = round(seuil)
-	nbMois = round((seuil%1)*12)
-	return "Rentable après " + str(nbAnnee) + " année(s) et " + str(nbMois) + "mois"
+	return [int(roi_entretien), int(roi_km)]
 
 
 # cette fonction lit le fichier json des donnes du client, affiche ces données, calcule la conversion possible de la flotte et le retour sur investissement de cette flotte.
 # Elle affiche la nouvelle flotte électrique son cout et les retour sur investissement
-def calcul_solution(fichier_client, verbose=True):
+def calcul_solution_flotte(fichier_client, verbose=True):
 	donnees_client = openJson(fichier_client)
 	if verbose : afficher_dico(donnees_client)
 
-	borne = Calcul.a_proximite(donnees_client["Numero"] +" " + donnees_client["Nom de rue"] + " " + donnees_client["Code postal"] + " " + donnees_client["Ville"])
-	
+	borne = Calcul.a_proximite(donnees_client["Numero"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
 	cout, conversion_voitures, conversion_utilitaires = calcul_conversion_flotte(donnees_client)
-	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"],borne)
+	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
+	baisse_emission = calcul_baisse_emission(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
 	
-	if not borne: 
-		coutBorne = CoutBorne.resultCoutBorne(conversion_voitures+conversion_utilitaires)
+	if not borne:
+		coutTotBorne = CoutBorne.resultCoutBorne(conversion_voitures+conversion_utilitaires)
 		borne="Borne à construire: " + str(CoutBorne.nombreBorne(conversion_voitures+conversion_utilitaires)) \
-		+ " pour un coût de " + str(coutBorne) + "€ avec "
-		cout[1] += coutBorne
-		cout[0] += coutBorne
-		cout[3] += CoutBorne.aideAdvenir(CoutBorne.getPrixBorne(),CoutBorne.getPrixRaccordement())
+		+ " pour un coût de " + str(coutTotBorne) + "€."
+		cout[1] += coutTotBorne
+		cout[0] += coutTotBorne
+		cout[3] += CoutBorne.getAidesBornes()
+
 
 	return {"Nouvelles voitures elec" : conversion_voitures,\
 			"Nouveaux utilitaires elec" : conversion_utilitaires,\
@@ -134,11 +110,11 @@ def calcul_solution(fichier_client, verbose=True):
 			"Cout final":cout[0],\
 			"ROI annuel sur l'entretien":roi[0],\
 			"ROI annuel sur les km":roi[1],\
-			"Seuil de rentabilité":seuilRentabilite(sum(roi),cout[0])\
+			"Baisse emission co2":baisse_emission,\
 			}
 
 
 if __name__ == "__main__":
-	solution = calcul_solution("donnees_client_example.json")
+	solution = calcul_solution_flotte("donnees_client_example.json")
 	print("\n\n 		Solution Proposé \n")
 	afficher_dico(solution)
