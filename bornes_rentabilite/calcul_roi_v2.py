@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 
+from pathlib import Path
+import os
+import sys
+sys.path.append(str(Path(os.getcwd()).parent)+"\\bornes_utiles")
+sys.path.append(str(Path(os.getcwd()).parent))
+print(sys.path)
 import json
-import Calcul
+from bornes_utiles import Calcul
 from calcul_emission_co2 import calcul_baisse_emission
 import CoutBorne
 

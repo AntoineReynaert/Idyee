@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
-from calcul_roi_v2 import *
-from pertinence import *
+import sys
+import os
+print(os.getcwd())
+sys.path.append(os.getcwd()+"\\bornes_utiles")
+sys.path.append(os.getcwd()+"\\bornes_rentabilite")
+print(sys.path)
+
+from bornes_rentabilite.calcul_roi_v2 import *
+from bornes_rentabilite.pertinence import *
 import json
+
 
 """
 Fonction principale permettant de calculer la pertinence des solutions bas carbone.
