@@ -18,6 +18,10 @@ class Solution:
         self.TRP = TRP
         self.Visibilite = Visibilite
         self.rang = rang
+
+    def __str__(self):
+        return str(self.getRang())+ "/20"
+
     
     def getROI(self):
         return self.ROI
@@ -70,4 +74,4 @@ if __name__ == "__main__":
 	A.calculRang()
 	print(A.getRang())
 	B = rangSolution(1000,2000,500)
-	print(B.getRang())
+	print(B)

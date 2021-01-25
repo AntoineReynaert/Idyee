@@ -31,6 +31,7 @@ def a_proximite(adr):
 
     #Convertir l'adresse en coordonnées
     adrCoord=get_coord(adr)
+    print(adrCoord)
     if not adrCoord:
         print("Nous n'arrivons pas à trouver l'adresse que vous avez renseignée")
         print("Veuillez saisir une adresse correcte de la forme : Numéro,Nom de rue,Code Postal,Ville")

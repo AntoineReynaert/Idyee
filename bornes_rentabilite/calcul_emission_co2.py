@@ -8,7 +8,7 @@ def openJson(file):
 	    data_dict = json.load(json_data)
 	    return data_dict
 
-# calcul la baisse d'emission co2 du au passage de la flotte en éléctrique
+# calcul la baisse d'emission co2 du au passage de la flotte en éléctrique (en tonne CO2 par €)
 def calcul_baisse_emission(nb_voitures, nb_utilitaires, km, pourcentage):
 	emission=openJson("emission_co2.json")
 	vce, vct, vre, vrt, uce, uct, ure, urt = emission["voiture_citadin_elec"], emission["voiture_citadin_thermique"],emission["voiture_rural_elec"], emission["voiture_rural_thermique"], emission["utilitaire_citadin_elec"], emission["utilitaire_citadin_thermique"], emission["utilitaire_rural_elec"], emission["utilitaire_rural_thermique"]
