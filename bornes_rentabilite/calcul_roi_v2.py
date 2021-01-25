@@ -80,8 +80,9 @@ def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 
 	roi_entretien = nb_voitures * roi_entretien_voiture + nb_utilitaires * roi_entretien_utilitaire
 	# citadin + rural
-	roi_km = (nb_voitures * km * (pvct - pvce) + nb_utilitaires * km * (puct - puce)) * pourcentage     *0.01 \
-			+(nb_voitures * km * (pvrt - pvre) + nb_utilitaires * km * (purt - pure)) * (1-pourcentage) *0.01
+	roi_citadin = ((nb_voitures * km * (pvct - pvce)) + (nb_utilitaires * km * (puct - puce))) * (pourcentage     *0.01)
+	roi_rural = ((nb_voitures * km * (pvrt - pvre)) + (nb_utilitaires * km * (purt - pure))) * ((100-pourcentage) *0.01)
+	roi_km = roi_citadin + roi_rural
 
 	return [int(roi_entretien), int(roi_km)]
 
