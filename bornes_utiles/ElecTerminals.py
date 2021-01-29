@@ -4,6 +4,7 @@ from math import *
 import matplotlib.pyplot as plt
 import csv
 from Classes import *
+from OpenDataSoftAPI import *
 
 
 ### 1st Use Case: Electrical Terminals
