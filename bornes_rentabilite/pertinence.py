@@ -18,6 +18,10 @@ class Solution:
         self.TRP = TRP
         self.Visibilite = Visibilite
         self.rang = rang
+
+    def __str__(self):
+        return str(self.getRang())+ "/20"
+
     
     def getROI(self):
         return self.ROI
@@ -34,7 +38,7 @@ class Solution:
     def getVisibilite(self):
         return self.Visibilite
     
-    #Calcul du rang du ROI sur neuf    
+    #Calcul du rang du ROI sur neuf
     def calculROI(self,benefAn,coutInvestissement):
         ROI = (benefAn/coutInvestissement)
         self.ROI = round((1/(1+exp((-20*ROI)+0.4))) * 9,2)
@@ -70,4 +74,4 @@ if __name__ == "__main__":
 	A.calculRang()
 	print(A.getRang())
 	B = rangSolution(1000,2000,500)
-	print(B.getRang())
+	print(B)

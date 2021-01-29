@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 
+from pathlib import Path
+import os
+import sys
+sys.path.append(str(Path(os.getcwd()).parent)+"\\bornes_utiles")
+sys.path.append(str(Path(os.getcwd()).parent))
 import json
-import Calcul
+from bornes_utiles import Calcul
 from calcul_emission_co2 import calcul_baisse_emission
 import CoutBorne
 
@@ -75,8 +80,9 @@ def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 
 	roi_entretien = nb_voitures * roi_entretien_voiture + nb_utilitaires * roi_entretien_utilitaire
 	# citadin + rural
-	roi_km = (nb_voitures * km * (pvct - pvce) + nb_utilitaires * km * (puct - puce)) * pourcentage     *0.01 \
-			+(nb_voitures * km * (pvrt - pvre) + nb_utilitaires * km * (purt - pure)) * (1-pourcentage) *0.01
+	roi_citadin = ((nb_voitures * km * (pvct - pvce)) + (nb_utilitaires * km * (puct - puce))) * (pourcentage     *0.01)
+	roi_rural = ((nb_voitures * km * (pvrt - pvre)) + (nb_utilitaires * km * (purt - pure))) * ((100-pourcentage) *0.01)
+	roi_km = roi_citadin + roi_rural
 
 	return [int(roi_entretien), int(roi_km)]
 
@@ -85,6 +91,7 @@ def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 # Elle affiche la nouvelle flotte électrique son cout et les retour sur investissement
 def calcul_solution_flotte(fichier_client, verbose=True):
 	donnees_client = openJson(fichier_client)
+	donnees_borne = openJson("construction_borne.json")
 	if verbose : afficher_dico(donnees_client)
 
 	borne = Calcul.a_proximite(donnees_client["Numero"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
@@ -93,12 +100,12 @@ def calcul_solution_flotte(fichier_client, verbose=True):
 	baisse_emission = calcul_baisse_emission(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
 	
 	if not borne:
-		coutTotBorne = CoutBorne.resultCoutBorne(conversion_voitures+conversion_utilitaires)
+		coutTotBorne = CoutBorne.resultCoutBorne(conversion_voitures+conversion_utilitaires,donnees_borne)
 		borne="Borne à construire: " + str(CoutBorne.nombreBorne(conversion_voitures+conversion_utilitaires)) \
 		+ " pour un coût de " + str(coutTotBorne) + "€."
 		cout[1] += coutTotBorne
 		cout[0] += coutTotBorne
-		cout[3] += CoutBorne.getAidesBornes()
+		cout[3] += CoutBorne.getAidesBornes(donnees_borne)
 
 
 	return {"Nouvelles voitures elec" : conversion_voitures,\
