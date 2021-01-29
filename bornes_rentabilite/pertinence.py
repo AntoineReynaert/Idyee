@@ -38,7 +38,7 @@ class Solution:
     def getVisibilite(self):
         return self.Visibilite
     
-    #Calcul du rang du ROI sur neuf    
+    #Calcul du rang du ROI sur neuf
     def calculROI(self,benefAn,coutInvestissement):
         ROI = (benefAn/coutInvestissement)
         self.ROI = round((1/(1+exp((-20*ROI)+0.4))) * 9,2)
