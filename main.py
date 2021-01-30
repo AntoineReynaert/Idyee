@@ -18,11 +18,7 @@ def main():
     dict_flotte = calcul_solution_flotte("donnees_client_example.json")
     solution_flotte = rangSolution(dict_flotte["ROI annuel sur l'entretien"]+ \
     dict_flotte["ROI annuel sur les km"],dict_flotte["Cout final"],dict_flotte["Baisse emission co2"])
-    print(dict_flotte)
-    print("ROI: " + str(solution_flotte.getROI()))
-    print("TRP: " + str(solution_flotte.getTRP()))
-    print(solution_flotte)
-    dict_flotte["Rang"] = solution_flotte
+    dict_flotte["Rang"] = solution_flotte.getRang()
     return dict_flotte
     
-main()
+print(main())

@@ -9,6 +9,8 @@ import json
 from bornes_utiles import Calcul
 from calcul_emission_co2 import calcul_baisse_emission
 import CoutBorne
+import OpenDataSoftAPI
+import coord_gps
 
 # Cette fonction ourve un fichier et json et le renvoie sous forme de dictionnaire
 def openJson(file):
@@ -93,8 +95,8 @@ def calcul_solution_flotte(fichier_client, verbose=True):
 	donnees_client = openJson(fichier_client)
 	donnees_borne = openJson("construction_borne.json")
 	if verbose : afficher_dico(donnees_client)
-
-	borne = Calcul.a_proximite(donnees_client["Numero"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
+	coordonnees = coord_gps.get_coord(donnees_client["Numero"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
+	borne = OpenDataSoftAPI.getBornes(coordonnees[0],coordonnees[1])
 	cout, conversion_voitures, conversion_utilitaires = calcul_conversion_flotte(donnees_client)
 	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
 	baisse_emission = calcul_baisse_emission(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])

@@ -15,7 +15,5 @@ def getBornes(latitude,longitude):
 def afficherBornes(jsonBornes):
     for element in jsonBornes:
         print(str(element["fields"]["ad_station"]) + " | " + str(element["fields"]["puiss_max"]) + " kW" + " | " + str(element["fields"]["coordonnees"]))
-        
-afficherBornes(getBornes(45.189,5.735))
 
     
