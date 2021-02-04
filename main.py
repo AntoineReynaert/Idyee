@@ -2,9 +2,14 @@
 import sys
 import os
 
-sys.path.append(os.getcwd()+"\\bornes_utiles")
-sys.path.append(os.getcwd()+"\\bornes_rentabilite")
-sys.path.append(os.getcwd()+"\\photovoltaique")
+try:
+    sys.path.append(os.getcwd()+"/bornes_utiles")
+    sys.path.append(os.getcwd()+"/bornes_rentabilite")
+    sys.path.append(os.getcwd()+"/photovoltaique")
+except (ModuleNotFoundError,ImportError):
+    sys.path.append(os.getcwd()+"\\bornes_utiles")
+    sys.path.append(os.getcwd()+"\\bornes_rentabilite")
+    sys.path.append(os.getcwd()+"\\photovoltaique")
 
 from bornes_rentabilite.calcul_roi_v2 import *
 from bornes_rentabilite.pertinence import *
@@ -20,6 +25,8 @@ Fonction principale permettant de calculer la pertinence des solutions bas carbo
 """
 
 def main():
+
+
     ranking = list()
     dict_flotte = calcul_solution_flotte("donnees_client_example.json")
     solution_flotte = rangSolution(dict_flotte["ROI annuel sur l'entretien"]+ \

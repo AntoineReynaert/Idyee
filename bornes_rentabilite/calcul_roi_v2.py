@@ -64,12 +64,16 @@ def calcul_cout(nb_voitures, nb_utilitaires):
 def calcul_conversion_flotte(donnees_client):
 	voit, util, capacite_investissement = donnees_client["Flotte"]["Voitures_thermiques"],donnees_client["Flotte"]["Utilitaires_thermiques"], donnees_client["Capacite investissement"]
 	while calcul_cout(voit, util)[0] > capacite_investissement:
-		if calcul_cout(voit-1, util)[0] < capacite_investissement:
+		if calcul_cout(max(0,voit -1), util)[0] < capacite_investissement:
 			voit = voit - 1
-		elif calcul_cout(voit, util-1)[0] < capacite_investissement:
+		elif calcul_cout(voit, max(0,util-1))[0] < capacite_investissement:
 			util = util-1
 		else :
-			voit, util = voit -1, util-1
+			print("les 2")
+			voit, util = max(0,voit -1), max(0,util-1)
+			print(voit,util)
+	if voit==0 and util ==0:
+		voit = 1
 	return [calcul_cout(voit, util), voit, util]
 
 
