@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-#!/usr/bin/env python3
-
-from PVGISapi import *
 
 """
 def getConsommationParMois(conso_annuelle):
@@ -22,9 +19,7 @@ def calculCrete(surface,consoAnnuel):
     else:
         crete = 5400
     
-    if surface <
-    
-     20:
+    if surface < 20:
         surface = 20
     elif surface >= 20 and surface <= 40:
         surface = 30
@@ -55,17 +50,9 @@ def injection(consoDict,prodDict):
             injection += prod[1]-conso[1]
     return injection
     
-    
-def prixConso(consoDict):
-    somme = 0
-    for key in consoDict:
-        somme += consoDict[key]
-    return somme * 0.135
-        
-#B=getMonthlyProd(getProduction(44.8,6.5,20,-45))
-#print(B)
-
-#print(prixConso(B))
-
-print(calculCrete(41,1750))
+"""
+Calcul réalisé en prenant arbitrairement 45% d'autoconsommation (55% d'injection)
+"""
+def prixConso(annualProd):
+    return annualProd * (((1.7-1)*(45/100)) + 1)
         

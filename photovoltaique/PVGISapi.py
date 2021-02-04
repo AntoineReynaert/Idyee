@@ -2,8 +2,8 @@
 
 import requests, json
 
-def getProduction(latitude,longitude,inclinaison,orientation):
-    url = "https://re.jrc.ec.europa.eu/api/PVcalc?lat=" + str(latitude) + "&lon=" + str(longitude) + "&peakpower=3&loss=15&outputformat=json&angle=" + str(inclinaison) + "&aspect=" + str(orientation)
+def getProduction(latitude,longitude,inclinaison,orientation,puissanceCrete):
+    url = "https://re.jrc.ec.europa.eu/api/PVcalc?lat=" + str(latitude) + "&lon=" + str(longitude) + "&peakpower="+str(puissanceCrete) + "&loss=15&outputformat=json&angle=" + str(inclinaison) + "&aspect=" + str(orientation)
     r = requests.get(url).json()
     return r
     
