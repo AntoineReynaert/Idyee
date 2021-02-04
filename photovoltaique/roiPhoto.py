@@ -62,10 +62,10 @@ def resultRoi_Trp(fichier_client,fichier_aide,fichier_prix):
     aideJson = openJson(fichier_aide)
     prixJson = openJson(fichier_prix)
     prodDict = production(donneesClient)
-    gainAnnuel = prixConso(prodDict["AnnualProd"])
+    gainAnnuel = round(prixConso(prodDict["AnnualProd"]))
     aideTot = aides(aideJson,prodDict["pWc"])
     coutTot = prixTot(prixJson,prodDict["pWc"]) - aideTot
-    ROI = gainAnnuel/coutTot
+    ROI = round(gainAnnuel/coutTot)
     gainCO2 = gain_carbone(prodDict["MonthlyProd"],getConsommationParMois(prodDict["AnnualProd"]),dict(),donneesClient["Conso annuel"],"","")
     return {
     "Cout total": coutTot,
