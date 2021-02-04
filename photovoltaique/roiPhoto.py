@@ -45,7 +45,6 @@ def prixTot(prixJson,pWc):
             Prix += nbrOndulateur * prixJson["Cable ondulateur mono"]
             Prix += prixJson["Coffret de protection PV AC Mono"]
             Prix += prixJson["PoseElectInf6"]
-        Prix += (10/100)*Prix
         Prix += prixJson["TVA"]*Prix
         return Prix
             
