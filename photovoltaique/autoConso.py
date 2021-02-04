@@ -17,8 +17,7 @@ def calculCrete(surface,consoAnnuel):
     elif consoAnnuel>2500:
         crete = 7000
     else:
-        crete = 5400
-    
+        crete = 5400    
     if surface < 20:
         surface = 20
     elif surface >= 20 and surface <= 40:

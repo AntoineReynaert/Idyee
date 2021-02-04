@@ -42,6 +42,7 @@ def aides(aideJson,pWc):
 def roi(fichier_client,fichier_aide,fichier_prix,puissancePhoto, pWc):
     donneesClient = openJson(fichier_client)
     aideJson = openJson(fichier_aide)
+    aideJson = openJson(fichier_prix)
     prodDict = production(donneesClient)
     gainAnnuel = prixConso(prodDict["AnnualProd"])
     aideTot = aides(aideJson,pWc)
