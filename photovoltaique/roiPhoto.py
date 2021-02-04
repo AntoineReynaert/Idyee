@@ -6,6 +6,7 @@ sys.path.append(str(Path(os.getcwd()).parent)+"\\bornes_utiles")
 from PVGISapi import *
 from autoConso import *
 import coord_gps
+from math import *
 
 # Cette fonction ourve un fichier et json et le renvoie sous forme de dictionnaire
 def openJson(file):
@@ -26,11 +27,28 @@ def production(donneesClient):
     result["pWc"] = pWc
     return result
     
-def prixTot(coutJson,pWc):
-        nbrPanneau = puissancePhoto / (pWc *1000)
-        Prix = nbrPanneau * prixPanneau
-        Prix += (nbrPanneau//2) * prixOnduleur
-        Prix += kitIntegration + Pose + raccordement + etude
+def prixTot(prixJson,pWc):
+        nbrPanneau = ceil((pWc *1000)/265)
+        nbrOndulateur = ceil(nbrPanneau/2)
+        Prix = nbrPanneau * prixJson["Panneaux_solaire"]
+        Prix += prixJson["Structure kit de pose"]
+        Prix += prixJson["Passerelle de communication"]
+        Prix += prixJson["Pose toiture"]
+        Prix += prixJson["Etude"]
+        if pWc > 6:
+            Prix += nbrOndulateur * prixJson["Ondulateur triphase"]
+            Prix += nbrOndulateur * prixJson["Cable ondulateur triphase"]
+            Prix += prixJson["Coffret de protection PV AC Tri"]
+            Prix += prixJson["PoseElectSup6"]
+        else:
+            Prix += nbrOndulateur * prixJson["Ondulateur mono"]
+            Prix += nbrOndulateur * prixJson["Cable ondulateur mono"]
+            Prix += prixJson["Coffret de protection PV AC Mono"]
+            Prix += prixJson["PoseElectInf6"]
+        Prix += (10/100)*Prix
+        Prix += prixJson["TVA"]*Prix
+        return Prix
+            
         
 def aides(aideJson,pWc):
     if pWc <= 3:
@@ -42,15 +60,15 @@ def aides(aideJson,pWc):
 def roi(fichier_client,fichier_aide,fichier_prix,puissancePhoto, pWc):
     donneesClient = openJson(fichier_client)
     aideJson = openJson(fichier_aide)
-    aideJson = openJson(fichier_prix)
+    prixJson = openJson(fichier_prix)
     prodDict = production(donneesClient)
     gainAnnuel = prixConso(prodDict["AnnualProd"])
     aideTot = aides(aideJson,pWc)
-    coutTot = 10000 - aideTot
+    coutTot = prixTot(prixJson,pWc) - aideTot
     ROI = gainAnnuel/coutTot
     return ROI  
 
         
     
 
-print(roi("donnees_client_example.json","fichier_aide.json","prix_panneau.json",200,7))
+print(roi("donnees_client_example.json","fichier_aide.json","prix_panneaux.json",200,7))
