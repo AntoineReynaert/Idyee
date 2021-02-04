@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 
-"""
 def getConsommationParMois(conso_annuelle):
     conso={}
     ratios=[0.09896,0.08904,0.08912,0.08014,0.07796,0.07204,0.07058,0.07066,0.07516,0.08534,0.091,0.10036]
-
     for i in range(12):
         conso[i+1]=ratios[i]*conso_annuelle
     return conso
-"""
 
 def calculCrete(surface,consoAnnuel):
     crete = 0

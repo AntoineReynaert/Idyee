@@ -5,6 +5,7 @@ import sys
 sys.path.append(str(Path(os.getcwd()).parent)+"\\bornes_utiles")
 from PVGISapi import *
 from autoConso import *
+from trpPhoto import *
 import coord_gps
 from math import *
 
@@ -56,18 +57,19 @@ def aides(aideJson,pWc):
         aideTot = aideJson["sup3"]*pWc
     return aideTot
     
-def roi(fichier_client,fichier_aide,fichier_prix,puissancePhoto, pWc):
+def resultRoi_Trp(fichier_client,fichier_aide,fichier_prix):
     donneesClient = openJson(fichier_client)
     aideJson = openJson(fichier_aide)
     prixJson = openJson(fichier_prix)
     prodDict = production(donneesClient)
     gainAnnuel = prixConso(prodDict["AnnualProd"])
-    aideTot = aides(aideJson,pWc)
-    coutTot = prixTot(prixJson,pWc) - aideTot
+    aideTot = aides(aideJson,prodDict["pWc"])
+    coutTot = prixTot(prixJson,prodDict["pWc"]) - aideTot
     ROI = gainAnnuel/coutTot
-    return ROI  
-
-        
-    
-
-print(roi("donnees_client_example.json","fichier_aide.json","prix_panneaux.json",200,7))
+    gainCO2 = gain_carbone(prodDict["MonthlyProd"],getConsommationParMois(prodDict["AnnualProd"]),dict(),donneesClient["Conso annuel"],"","")
+    return {
+    "Cout total": coutTot,
+    "Aides": aideTot,
+    "Gain Annuel": gainAnnuel,
+    "CO2 économisé": aideTot
+    }
