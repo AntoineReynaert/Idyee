@@ -1,8 +1,9 @@
 {
     "Panneaux_solaire": 70.00,
-    "Ondulateur mono": 85.00,
+    "Puissance panneaux_solaire": 265,
+    
     "Structure kit de pose": 134.46,
-    "Ondulateur mono": 100.00,
+    "Ondulateur mono": 85.00,
     "Cable ondulateur mono": 20.00,
     "Ondulateur triphase": 260.00,
     "Cable ondulateur triphase": 23.00,
