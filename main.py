@@ -2,9 +2,9 @@
 import sys
 import os
 
-sys.path.append(os.getcwd()+"\\bornes_utiles")
-sys.path.append(os.getcwd()+"\\bornes_rentabilite")
-sys.path.append(os.getcwd()+"\\photovoltaique")
+sys.path.append(os.getcwd()+"/bornes_utiles")
+sys.path.append(os.getcwd()+"/bornes_rentabilite")
+sys.path.append(os.getcwd()+"/photovoltaique")
 
 from bornes_rentabilite.calcul_roi_v2 import *
 from bornes_rentabilite.pertinence import *
