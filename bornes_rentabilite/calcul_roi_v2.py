@@ -69,9 +69,7 @@ def calcul_conversion_flotte(donnees_client):
 		elif calcul_cout(voit, max(0,util-1))[0] < capacite_investissement:
 			util = util-1
 		else :
-			print("les 2")
 			voit, util = max(0,voit -1), max(0,util-1)
-			print(voit,util)
 	if voit==0 and util ==0:
 		voit = 1
 	return [calcul_cout(voit, util), voit, util]
