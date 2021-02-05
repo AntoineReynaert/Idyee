@@ -93,7 +93,7 @@ def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
 
 # cette fonction lit le fichier json des donnes du client, affiche ces données, calcule la conversion possible de la flotte et le retour sur investissement de cette flotte.
 # Elle affiche la nouvelle flotte électrique son cout et les retour sur investissement
-def calcul_solution_flotte(fichier_client, verbose=True):
+def calcul_solution_flotte(fichier_client, verbose=False):
 	donnees_client = openJson(fichier_client)
 	donnees_borne = openJson("construction_borne.json")
 	if verbose : afficher_dico(donnees_client)
