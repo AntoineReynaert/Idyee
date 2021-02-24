@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 
 
-
+"""
+Fonction permettant de calculer le gain en carbone grâce à la mise en place 
+des panneaux photovoltaïques.
+Calcul basé sur le fichier excel de Mr. Marchand
+"""
 def gain_carbone(prod_moyenne_mois,conso_moyenne_mois,injection_moyenne_mois,kwh,conso_euro,tranche):
     mois=[31,28,31,30,31,30,31,31,30,31,30,31]
     
