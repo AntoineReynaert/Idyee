@@ -23,13 +23,14 @@ def production(donneesClient):
     pWc = calculCrete(donneesClient["Surface toit"],donneesClient["Conso annuel"])
     coordonnees = coord_gps.get_coord(donneesClient["Numero"] + donneesClient["Nom de rue"] + donneesClient["Code postal"] + donneesClient["Ville"])
     production = getProduction(coordonnees[0],coordonnees[1],donneesClient["Inclinaison"],donneesClient["Orientation"],pWc)
+    
     result["MonthlyProd"] = getMonthlyProd(production)
     result["AnnualProd"] = getAnnualProd(production)
     result["pWc"] = pWc
     return result
     
 def prixTot(prixJson,pWc):
-        nbrPanneau = ceil((pWc *1000)/265)
+        nbrPanneau = ceil((pWc*1000)/prixJson["Puissance panneaux_solaire"])
         nbrOndulateur = ceil(nbrPanneau/2)
         Prix = nbrPanneau * prixJson["Panneaux_solaire"]
         Prix += prixJson["Structure kit de pose"]
@@ -68,8 +69,10 @@ def resultRoi_Trp(fichier_client,fichier_aide,fichier_prix):
     ROI = round(gainAnnuel/coutTot)
     gainCO2 = gain_carbone(prodDict["MonthlyProd"],getConsommationParMois(prodDict["AnnualProd"]),dict(),donneesClient["Conso annuel"],"","")
     return {
-    "Cout total": coutTot,
+    "Nombre de panneaux": ceil(prodDict["pWc"]*3),
+    "Cout total": round(coutTot),
     "Aides": aideTot,
+    "Production (kwh)": prodDict["AnnualProd"],
     "Gain Annuel": gainAnnuel,
     "CO2 économisé": aideTot
     }

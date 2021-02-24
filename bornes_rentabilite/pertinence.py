@@ -56,11 +56,11 @@ class Solution:
 Calcul du rang d'une solution. Le rang = (ROI/9) + (TRP/9) + (Visibilite/2)
 """
 
-def rangSolution(benefAn, coutInvestissement,gainCO2An):
+def rangSolution(benefAn, coutInvestissement,gainCO2An,visibilite):
     newSolution = Solution(None,None,None,None)
     newSolution.calculROI(benefAn,coutInvestissement)
     newSolution.calculTRP(gainCO2An,coutInvestissement)
-    newSolution.setVisibilite(2)
+    newSolution.setVisibilite(visibilite)
     newSolution.calculRang()
     return newSolution
         

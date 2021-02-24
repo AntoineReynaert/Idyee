@@ -16,16 +16,16 @@ def calculCrete(surface,consoAnnuel):
     else:
         crete = 5400    
     if surface < 20:
-        surface = 20
+        surface_ind = 20
     elif surface >= 20 and surface <= 40:
-        surface = 30
+        surface_ind = 30
     elif surface > 40 and surface < 60:
-        surface = 50
+        surface_ind = 50
     else:
-        surface = 60
+        surface_ind = 60
     diffcrete = round(((crete*1.7)/300),0)
-    if diffcrete > surface:
-        coeffsurface = surface/diffcrete
+    if diffcrete > surface_ind:
+        coeffsurface = surface_ind/diffcrete
     else:
         coeffsurface = 1
     return crete*(coeffsurface/1000)
@@ -50,5 +50,7 @@ def injection(consoDict,prodDict):
 Calcul réalisé en prenant arbitrairement 45% d'autoconsommation (55% d'injection)
 """
 def prixConso(annualProd):
-    return annualProd * (((1.7-1)*(45/100)) + 1)
+    autoconso = annualProd * (45/100) * 0.17
+    injection = annualProd * (55/100) * 0.1
+    return autoconso + injection
         

@@ -14,4 +14,4 @@ def getMonthlyProd(jsonPVGIS):
     return result
     
 def getAnnualProd(jsonPVGIS):
-    return jsonPVGIS["outputs"]["totals"]["fixed"]["E_m"]
+    return jsonPVGIS["outputs"]["totals"]["fixed"]["E_y"]

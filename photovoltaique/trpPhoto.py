@@ -28,13 +28,13 @@ def gain_carbone(prod_moyenne_mois,conso_moyenne_mois,injection_moyenne_mois,kwh
     correctif=kwh_annuel/conso_totale
     prod_totale=prod_reelle*correctif
     if not injection_moyenne_mois:
-        inject_reelle=(prod_reelle*55/100)
+        inject_reelle=(prod_reelle*(55/100))
     else:
         inject_reelle=inject_reelle+mois[i]*injection_moyenne_mois[i+1]
     inject_totale=inject_reelle*correctif
 
     diff=prod_totale-inject_totale
-    carbone=round(diff,0)*37.81/1000
+    carbone=(round(diff,0)*37.81)/1000
     return carbone
 
 
