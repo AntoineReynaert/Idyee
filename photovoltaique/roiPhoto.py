@@ -86,12 +86,13 @@ def resultRoi_Trp(fichier_client,fichier_aide,fichier_prix):
     aideTot = aides(aideJson,prodDict["pWc"])
     coutTot = prixTot(prixJson,prodDict["pWc"]) - aideTot
     ROI = round(gainAnnuel/coutTot)
-    gainCO2 = gain_carbone(prodDict["MonthlyProd"],getConsommationParMois(prodDict["AnnualProd"]),dict(),donneesClient["Conso annuel"],"","")
+    gainCO2 = gain_carbone(prodDict["AnnualProd"],prixJson)
     return {
+    "Solution bas carbone": "Autoconsommation",
     "Nombre de panneaux": ceil(prodDict["pWc"]*3),
     "Cout total": round(coutTot),
     "Aides": aideTot,
     "Production (kwh)": prodDict["AnnualProd"],
     "Gain Annuel": gainAnnuel,
-    "CO2 économisé": aideTot
+    "CO2 economise": gainCO2
     }

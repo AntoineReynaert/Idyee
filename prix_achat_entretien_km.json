@@ -11,5 +11,9 @@
     "utilitaire_citadin_elec": 0.038,
     "utilitaire_citadin_thermique": 0.161,
     "utilitaire_rural_elec": 0.044,
-    "utilitaire_rural_thermique": 0.137
+    "utilitaire_rural_thermique": 0.137,
+	
+	"aides_bornes" : [2100],
+	"prix_raccordement" : 2000,
+	"prix_borne" : 1500
 }

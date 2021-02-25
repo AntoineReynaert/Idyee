@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import os
+import json
 
 try:
     sys.path.append(os.getcwd()+"/bornes_utiles")
@@ -32,7 +33,7 @@ Pour finir on trie la liste en fonction du rang.
 def main():
     ranking = list()
     #Photovoltaïque (visibilité = 2)
-    dict_flotte = calcul_solution_flotte("donnees_client_example.json")
+    dict_flotte = calcul_solution_flotte("donnees_client_example.json", "fichier_aide.json", "prix_achat_entretien_km.json")
     solution_flotte = rangSolution(dict_flotte["ROI annuel sur l'entretien"]+ \
     dict_flotte["ROI annuel sur les km"],dict_flotte["Cout final"],dict_flotte["Baisse emission co2"],2)
     dict_flotte["Rang"] = solution_flotte.getRang()
@@ -40,14 +41,13 @@ def main():
     
     #Autoconsommation (visibilité = 1)
     dict_photo = resultRoi_Trp("donnees_client_example.json","fichier_aide.json","prix_panneaux.json" )
-    solution_photo = rangSolution(dict_photo["Gain Annuel"], dict_photo["Cout total"],dict_photo["CO2 économisé"],1)
+    solution_photo = rangSolution(dict_photo["Gain Annuel"], dict_photo["Cout total"],dict_photo["CO2 economise"],1)
     dict_photo["Rang"] = solution_photo.getRang()
     ranking.append(dict_photo)
     
     #Trie en fonction du rang
     ranking.sort(key = getclerang, reverse = True)
-    print(ranking)
-    return ranking
+    return json.dumps(ranking)
     
     
-main()
+print(main())

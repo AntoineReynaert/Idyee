@@ -3,7 +3,7 @@
     "Numero" : "19",
     "Nom de rue" : "avenue marechal randon",
     "Code postal": "38000",
-    "Ville": "Grenoble",
+    "Ville": "grenoble",
     "Flotte" : {
     	"Voitures_thermiques":5,
     	"Voitures_electriques": 0,
@@ -31,8 +31,8 @@
     "Location 0, Achat 1 " : 1,
     "Parcours citadin % :" : 80,
 	
-	"Surface toit": 50,
-	"Conso annuel": 4000,
-	"Inclinaison": 20,
+	"Surface toit": 25,
+	"Conso annuel": 5000,
+	"Inclinaison": 30,
 	"Orientation": -45
 }

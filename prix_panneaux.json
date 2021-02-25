@@ -13,5 +13,7 @@
     "Coffret de protection PV AC Mono": 115.20,
     "Coffret de protection PV AC Tri": 211.00,
     "Passerelle de communication":  140.00,
-	"TVA": 0.1
+	"TVA": 0.1,
+	
+	"empreinte_carbone_kwh_g": 65
 }
