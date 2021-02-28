@@ -1,4 +1,9 @@
 {
+	"prime_conversion_voiture": 2500,
+	"prime_conversion_utilitaire": 5000,
+	"bonus_eco_sup45k":3000,
+	"bonus_eco_inf45k":5000,
+	
     "inf3": 380,
 	"sup3": 280
 }

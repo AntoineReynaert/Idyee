@@ -11,8 +11,8 @@ def get_coord(adresse):
     if not r["features"]:
         return []
     else:
-
         return (r["features"][0]["geometry"]["coordinates"])
+        
 def get_adr(coord):
     api_url="https://api-adresse.data.gouv.fr/reverse/?"
     query='lon='+str(coord[0])+'&lat='+str(coord[1])

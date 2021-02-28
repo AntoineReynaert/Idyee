@@ -1,9 +1,9 @@
 {
     "Nom_societe": "Idyee",
-    "Numero" : "8",
-    "Nom de rue" : "cours jean jaures",
-    "Code postal": "38000",
-    "Ville": "Grenoble",
+    "Numero" : "36",
+    "Nom de rue" : "boulevard louis armand",
+    "Code postal": "13012",
+    "Ville": "marseille",
     "Flotte" : {
     	"Voitures_thermiques":5,
     	"Voitures_electriques": 0,
@@ -27,12 +27,12 @@
 
     },
     "Km annuel" : 40000,
-    "Capacite investissement" : 100000,
+    "Capacite investissement" : 10000,
     "Location 0, Achat 1 " : 1,
     "Parcours citadin % :" : 80,
 	
-	"Surface toit": 50,
-	"Conso annuel": 4000,
-	"Inclinaison": 20,
+	"Surface toit": 60,
+	"Conso annuel": 5000,
+	"Inclinaison": 30,
 	"Orientation": -45
 }
