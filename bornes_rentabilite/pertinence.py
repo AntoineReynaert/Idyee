@@ -49,7 +49,7 @@ class Solution:
         self.TRP = round((1/(1+exp((-20*TRP)+0.4))) * 9,2)
     
     def calculRang(self):
-        self.rang = self.getROI() + self.getTRP() + self.getVisibilite()
+        self.rang = round(self.getROI() + self.getTRP() + self.getVisibilite(),1)
 
 
 """

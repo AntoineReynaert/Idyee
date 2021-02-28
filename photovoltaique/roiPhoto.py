@@ -27,9 +27,9 @@ crête (pWc).
 def production(donneesClient):
     result = dict()
     pWc = calculCrete(donneesClient["Surface toit"],donneesClient["Conso annuel"])
-    coordonnees = coord_gps.get_coord(donneesClient["Numero"] + donneesClient["Nom de rue"] + donneesClient["Code postal"] + donneesClient["Ville"])
+    coordonnees = coord_gps.get_coord(donneesClient["Numero"] +" "+ donneesClient["Nom de rue"] + " " + donneesClient["Code postal"] + " "+ donneesClient["Ville"])
     #Utilisation de l'API PVGIS via le code python dans le fichier "PVGISapi.py"
-    production = getProduction(coordonnees[0],coordonnees[1],donneesClient["Inclinaison"],donneesClient["Orientation"],pWc)
+    production = getProduction(coordonnees[1],coordonnees[0],donneesClient["Inclinaison"],donneesClient["Orientation"],pWc)
     
     result["MonthlyProd"] = getMonthlyProd(production)
     result["AnnualProd"] = getAnnualProd(production)
@@ -73,7 +73,8 @@ def aides(aideJson,pWc):
     return aideTot
     
 """
-Fonction principale permettant de calculer et de retourner le nombre de panneaux
+Fonction principale permettant de 
+er et de retourner le nombre de panneaux
 photovoltaïques, la cout total, le montant des aides, la production estimée,
 gain annuel d'argent et le CO2 économisé.
 """

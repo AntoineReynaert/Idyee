@@ -76,8 +76,7 @@ def calcul_conversion_flotte(donnees_client,fichier_prix,fichier_aide):
 
 
 # cette fonction calcul le retour sur investissement annuel sur l'entretien et sur les km parcourus
-def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage):
-	prix=openJson("prix_achat_entretien_km.json")
+def calcul_roi(nb_voitures, nb_utilitaires, km, pourcentage,prix):
 	roi_entretien_voiture = prix["entretien_annuel_voiture_thermique"] - prix["entretien_annuel_voiture_elec"]
 	roi_entretien_utilitaire = 0 #non determine pour le moment
 	pvce, pvct, pvre, pvrt, puce, puct, pure, purt = prix["voiture_citadin_elec"], prix["voiture_citadin_thermique"],prix["voiture_rural_elec"], prix["voiture_rural_thermique"], prix["utilitaire_citadin_elec"], prix["utilitaire_citadin_thermique"], prix["utilitaire_rural_elec"], prix["utilitaire_rural_thermique"]
@@ -98,11 +97,11 @@ def calcul_solution_flotte(fichier_client,fichier_aide ,fichier_prix, verbose=Fa
 	donnees_prix = openJson(fichier_prix)
 	donnees_aides = openJson(fichier_aide)
 	if verbose : afficher_dico(donnees_client)
-	coordonnees = coord_gps.get_coord(donnees_client["Numero"] + donnees_client["Nom de rue"] + donnees_client["Code postal"] + donnees_client["Ville"])
+	coordonnees = coord_gps.get_coord(donnees_client["Numero"] +" "+ donnees_client["Nom de rue"] + " " + donnees_client["Code postal"] + " "+ donnees_client["Ville"])
 	borne = OpenDataSoftAPI.getBornes(coordonnees[0],coordonnees[1])
 	cout, conversion_voitures, conversion_utilitaires = calcul_conversion_flotte(donnees_client,donnees_prix,donnees_aides)
-	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
-	baisse_emission = calcul_baisse_emission(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"])
+	roi = calcul_roi(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"],donnees_prix)
+	baisse_emission = calcul_baisse_emission(conversion_voitures, conversion_utilitaires, donnees_client["Km annuel"], donnees_client["Parcours citadin % :"],donnees_prix)
 	
 	if not borne:
 		coutTotBorne = CoutBorne.resultCoutBorne(conversion_voitures+conversion_utilitaires,donnees_prix)

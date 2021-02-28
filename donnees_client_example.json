@@ -1,9 +1,9 @@
 {
     "Nom_societe": "Idyee",
-    "Numero" : "19",
-    "Nom de rue" : "avenue marechal randon",
-    "Code postal": "38000",
-    "Ville": "grenoble",
+    "Numero" : "36",
+    "Nom de rue" : "boulevard louis armand",
+    "Code postal": "13012",
+    "Ville": "marseille",
     "Flotte" : {
     	"Voitures_thermiques":5,
     	"Voitures_electriques": 0,
@@ -31,7 +31,7 @@
     "Location 0, Achat 1 " : 1,
     "Parcours citadin % :" : 80,
 	
-	"Surface toit": 25,
+	"Surface toit": 60,
 	"Conso annuel": 5000,
 	"Inclinaison": 30,
 	"Orientation": -45
